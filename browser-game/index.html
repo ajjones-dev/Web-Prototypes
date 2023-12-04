@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crossing</title>
+    <meta charset="UTF-8" >
+    <meta name="Browser JS Game" content="Made this for my son to test" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <link rel="icon" href="favicon.ico" >
+    <link rel="stylesheet" href="resources/css/style.css" >
+  </head>
+  <body>
+    <div class="parent">
+      <div class="header">
+        <h1 class="title">Browser JS Game</h1>
+      </div>
+      <div class="nav">
+        <button id="startButton" class=button style="background-color:skyblue"}>Start</button>
+        <p>Select a difficulty and press start.</p>
+        <input type="radio" id="easy" name="difficulty" value="easy">
+        <label for="easy">Easy</label><br>
+        <input type="radio" id="medium" name="difficulty" value="medium">
+        <label for="medium">Medium</label><br>
+        <input type="radio" id="hard" name="difficulty" value="hard">
+        <label for="hard">Hard</label>
+      </div>
+      <div class="gameSpace">
+        <canvas id=gameWindow width=600px height=400px></canvas>
+      </div>
+      <div class="header"></div>
+    </div>
+  </body>
+  <script src="./resources/js/gameMechanics.js"></script>
+</html>
