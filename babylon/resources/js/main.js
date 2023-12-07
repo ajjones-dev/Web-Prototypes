@@ -29,6 +29,10 @@ function createSun(scene) {
     }, scene);
 
     sun.material = sunMaterial;
+
+    //Sunlight
+    const sunlight = new BABYLON.PointLight('sunlight', BABYLON.Vector3.Zero(), scene);
+    sunlight.intensity = 4
 }
 
 function createPlanet(scene) {
