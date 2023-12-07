@@ -17,6 +17,23 @@ function createLight(scene) {
     light.groundColor = new BABYLON.Color3(0,0,1);
 }
 
+function createSkyBox(scene) {
+    const skyboxMaterial = new BABYLON.StandardMaterial('skyboxMaterial', scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.diffuseColor = BABYLON.Color3.Black();
+    skyboxMaterial.specularColor = BABYLON.Color3.Black();
+
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('assets/images/skybox/skybox', scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+    const skybox = BABYLON.MeshBuilder.CreateBox('skybox', {
+        size: 1000
+    }, scene);
+
+    skybox.infiniteDistance = true;
+    skybox.material = skyboxMaterial;
+}
+
 function createSun(scene) {
     const sunMaterial = new BABYLON.StandardMaterial('sunMaterial', scene)
     sunMaterial.emissiveTexture = new BABYLON.Texture('assets/images/sun.jpg', scene)
@@ -54,6 +71,7 @@ function createScene() {
 
     createCamera(scene);
     createLight(scene);
+    createSkyBox(scene);
     createSun(scene);
     createPlanet(scene);
     return scene;
