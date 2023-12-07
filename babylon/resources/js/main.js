@@ -23,7 +23,7 @@ function createSkyBox(scene) {
     skyboxMaterial.diffuseColor = BABYLON.Color3.Black();
     skyboxMaterial.specularColor = BABYLON.Color3.Black();
 
-    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('assets/images/skybox/skybox', scene);
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('./resources/assets/images/skybox/skybox', scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
     const skybox = BABYLON.MeshBuilder.CreateBox('skybox', {
@@ -36,7 +36,7 @@ function createSkyBox(scene) {
 
 function createSun(scene) {
     const sunMaterial = new BABYLON.StandardMaterial('sunMaterial', scene)
-    sunMaterial.emissiveTexture = new BABYLON.Texture('assets/images/sun.jpg', scene)
+    sunMaterial.emissiveTexture = new BABYLON.Texture('./resources/assets/images/sun.jpg', scene)
     sunMaterial.diffuseColor = BABYLON.Color3.Black();
     sunMaterial.specularColor = BABYLON.Color3.Black();
 
@@ -52,17 +52,30 @@ function createSun(scene) {
     sunlight.intensity = 4
 }
 
-function createPlanet(scene) {
+function createPlanet(material, position, speed, size, scene) {
     const planetMaterial = new BABYLON.StandardMaterial('planetMaterial', scene);
-    planetMaterial.diffuseTexture = new BABYLON.Texture('assets/images/sand.png', scene);
+    planetMaterial.diffuseTexture = new BABYLON.Texture(material, scene);
     planetMaterial.specularColor = BABYLON.Color3.Black();
 
     const planet = BABYLON.MeshBuilder.CreateSphere('planet', {
         segments: 16,
-        diameter: 1
+        diameter: size
     }, scene);
-    planet.position.x = 6;
+    planet.position.x = position;
     planet.material = planetMaterial;
+
+    planet.orbit = {
+        radius: planet.position.x,
+        speed: speed,
+        angle: 0
+    };
+
+    scene.registerBeforeRender(() => {
+        planet.position.x = planet.orbit.radius * Math.sin(planet.orbit.angle);
+        planet.position.z = planet.orbit.radius * Math.cos(planet.orbit.angle);
+        planet.orbit.angle += planet.orbit.speed;
+    }
+    );
 }
 
 function createScene() {
@@ -73,7 +86,9 @@ function createScene() {
     createLight(scene);
     createSkyBox(scene);
     createSun(scene);
-    createPlanet(scene);
+    createPlanet('./resources/assets/images/sand.png', 4, 0.02, 0.5, scene);
+    createPlanet('./resources/assets/images/brown_rock.png', 6, 0.01, 0.7, scene);
+    createPlanet('./resources/assets/images/dark_rock.png', 8, 0.005, 1, scene);
     return scene;
 }
 
