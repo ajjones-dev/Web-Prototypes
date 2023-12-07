@@ -74,6 +74,8 @@ function createPlanet(material, position, speed, size, scene) {
         planet.position.x = planet.orbit.radius * Math.sin(planet.orbit.angle);
         planet.position.z = planet.orbit.radius * Math.cos(planet.orbit.angle);
         planet.orbit.angle += planet.orbit.speed;
+        //planet.rotation.x = Math.sin(planet.orbit.angle);
+        planet.rotation.y = Math.cos(planet.orbit.angle)
     }
     );
 }
