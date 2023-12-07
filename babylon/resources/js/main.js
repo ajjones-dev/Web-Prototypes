@@ -86,9 +86,11 @@ function createScene() {
     createLight(scene);
     createSkyBox(scene);
     createSun(scene);
-    createPlanet('./resources/assets/images/sand.png', 4, 0.02, 0.5, scene);
+    createPlanet('./resources/assets/images/sand.png', 4, 0.02, 0.3, scene);
     createPlanet('./resources/assets/images/brown_rock.png', 6, 0.01, 0.7, scene);
     createPlanet('./resources/assets/images/dark_rock.png', 8, 0.005, 1, scene);
+    createPlanet('./resources/assets/images/sand.png', 10, 0.003, 0.6, scene);
+    createPlanet('./resources/assets/images/brown_rock.png', 14, 0.001, 2, scene);
     return scene;
 }
 
